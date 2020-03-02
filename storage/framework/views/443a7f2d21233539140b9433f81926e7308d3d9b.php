@@ -7,12 +7,9 @@
 </head>
 <body>
     <h1> Cantine Choupi </h1>
-        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <li>
-                <?php echo e($i->name); ?>
-
-            </li>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <a href="/category"> Category </a>
+    <br>
+    <a href="/product"> Product </a>
 </body>
 </html>
 <?php /**PATH C:\xampp\htdocs\XamppDocs\Competa\Laravel\CantineChoupi\resources\views/home.blade.php ENDPATH**/ ?>

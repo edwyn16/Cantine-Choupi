@@ -9,6 +9,6 @@ class ProductController extends Controller
 {
     function products() {
         $product = Product::all();
-        return view('home', ['data'=>$product]);
+        return view('product', ['product'=>$product]);
     }
 }

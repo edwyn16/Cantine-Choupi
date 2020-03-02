@@ -7,10 +7,8 @@
 </head>
 <body>
     <h1> Cantine Choupi </h1>
-        @foreach($category as $i)
-            <li>
-                {{$i->name}}
-            </li>
-        @endforeach
+    <a href="/category"> Category </a>
+    <br>
+    <a href="/product"> Product </a>
 </body>
 </html>
