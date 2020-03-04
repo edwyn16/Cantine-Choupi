@@ -11,7 +11,7 @@
 
     <div class="navbar">
         <a href="/"> Home </a>
-        <a href="/product">Products</a>
+        <a href="/products">Products</a>
         <div class="dropdown">
             <button class="dropbtn"> Category
                 <i class="fa fa-caret-down"></i>

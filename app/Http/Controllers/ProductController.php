@@ -7,8 +7,9 @@ use App\Product;
 
 class ProductController extends Controller
 {
-    function products() {
+    // shows every product
+    public function index() {
         $product = Product::all();
-        return view('product', ['product'=>$product]);
+        return view('product', compact('product'));
     }
 }

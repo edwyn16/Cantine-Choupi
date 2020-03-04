@@ -8,19 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    public function show() {
-        $products = DB::table('products')->get();
-        $categories = DB::table('categories')->get();
+    public function index() {
+        $categories = Category::with(['product'])->get();
 
         $data = [
-            'products' => $products,
             'categories' => $categories
         ];
 
-        return view('category')->with($data);
+        return view('category')->with($data, compact('categories'));
     }
 
-    public function showCategoryProducts($id) {
+    public function show($id) {
         $category = Category::all();
         $categories = Category::with(['product'])->find($id);
         return view('categoryProducts', compact('category', 'categories'));
