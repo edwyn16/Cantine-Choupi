@@ -61,10 +61,10 @@ class ProductController extends Controller
         $order->save();
 
         $session = Session::get('cart');
-        foreach ($session->get(['items']) as $item) {
+        foreach (Session::get('cart')['items'] as $item) {
             $orderList = new OrderList;
 
-            $orderList->products = $item['item']->name;
+            $orderList->products = $item['items']->name;
             $orderList->price = $item['price'];
             $orderList->amount = $item['totalAmount'];
             $orderList->order_id = $order->id;
