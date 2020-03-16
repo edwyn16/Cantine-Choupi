@@ -61,12 +61,12 @@ class ProductController extends Controller
         $order->save();
 
         $session = Session::get('cart');
-        foreach ($session['items'] as $item) {
+        foreach ($session->get(['items']) as $item) {
             $orderList = new OrderList;
 
             $orderList->products = $item['item']->name;
             $orderList->price = $item['price'];
-            $orderList->amount = $item['amount'];
+            $orderList->amount = $item['totalAmount'];
             $orderList->order_id = $order->id;
 
             $orderList->save();
@@ -74,7 +74,7 @@ class ProductController extends Controller
 
         Session::forget('cart');
         $cart = new Cart();
-        Session::put('cart', $cart-get());
+        Session::put('cart', $cart->get());
 
         $request->session()->flash('success', 'Order has been sent!!!');
         return redirect()->back();
