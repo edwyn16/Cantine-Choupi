@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::get('/category', 'CategoryController@index');
 Route::get('/categories/{id}', 'CategoryController@show');
+
 Route::get('/product', [
     'uses' => 'ProductController@index',
     'as' => 'product.index'
@@ -35,4 +36,9 @@ Route::get('/shoppingCart', [
 Route::get('/checkout', [
     'uses' => 'ProductController@checkout',
     'as' => 'product.checkout'
+]);
+
+Route::post('/checkout', [
+    'uses' => 'ProductController@succes',
+    'as' => 'succes'
 ]);

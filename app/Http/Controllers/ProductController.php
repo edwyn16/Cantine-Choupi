@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Product;
 use Session;
 use App\Cart;
+use App\Order;
+use App\OrderList;
 
 class ProductController extends Controller
 {
@@ -43,7 +45,38 @@ class ProductController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        $total = $total['totalPrice'];
-        return view('product.checkout', ['cart' => $total]);
+        $total = $cart->totalPrice;
+        return view('checkout', ['cart' => $total]);
+    }
+
+    public function succes(Request $request) {
+        $order = new Order;
+
+        $order->firstname = $request->firstname;
+        $order->lastname = $request->lastname;
+        $order->address = $request->address;
+        $order->city = $request->city;
+        $order->email = $request->email;
+        $order->tel = $request->tel;
+        $order->save();
+
+        $session = Session::get('cart');
+        foreach ($session['items'] as $item) {
+            $orderList = new OrderList;
+
+            $orderList->products = $item['item']->name;
+            $orderList->price = $item['price'];
+            $orderList->amount = $item['amount'];
+            $orderList->order_id = $order->id;
+
+            $orderList->save();
+        }
+
+        Session::forget('cart');
+        $cart = new Cart();
+        Session::put('cart', $cart-get());
+
+        $request->session()->flash('success', 'Order has been sent!!!');
+        return redirect()->back();
     }
 }
