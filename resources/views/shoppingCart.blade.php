@@ -15,7 +15,7 @@
             <button type="button"> Add item </button>
             <hr>
         @endforeach
-        <strong> Total: {{ $cart['totalPrice'] }} </strong>
+        <strong> Total: €{{ $cart['totalPrice'] }} </strong>
         <hr>
         <a href="{{ route('product.checkout') }}">
             <button type="button"> Order </button>

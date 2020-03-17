@@ -15,7 +15,7 @@
             <button type="button"> Add item </button>
             <hr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        <strong> Total: <?php echo e($cart['totalPrice']); ?> </strong>
+        <strong> Total: €<?php echo e($cart['totalPrice']); ?> </strong>
         <hr>
         <a href="<?php echo e(route('product.checkout')); ?>">
             <button type="button"> Order </button>

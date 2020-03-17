@@ -17,7 +17,7 @@ class CreateOrderListTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->char('products', 100)->nullable(false);
-            $table->integer('amount');
+            $table->integer('totalAmount');
             $table->char('price', 100);
             $table->bigInteger('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders');
