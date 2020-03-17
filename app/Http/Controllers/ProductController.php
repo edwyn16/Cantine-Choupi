@@ -60,21 +60,24 @@ class ProductController extends Controller
         $order->tel = $request->tel;
         $order->save();
 
-        $session = Session::get('cart');
-        foreach (Session::get('cart')['items'] as $item) {
-            $orderList = new OrderList;
+        function productInDB() {
+            $session = Session::get('cart');
 
-            $orderList->products = $item['items']->name;
-            $orderList->price = $item['price'];
-            $orderList->amount = $item['totalAmount'];
-            $orderList->order_id = $order->id;
+            foreach ($session['items'] as $item) {
+                $orderList = new OrderList($item);
 
-            $orderList->save();
+                $orderList->products = $item['items']->name;
+                $orderList->price = $item['price'];
+                $orderList->amount = $item['totalAmount'];
+                $orderList->order_id = $order->id;
+
+                $orderList->save();
+            }
+
+            Session::forget('cart');
+            $cart = new Cart();
+            Session::put('cart', $cart->get());
         }
-
-        Session::forget('cart');
-        $cart = new Cart();
-        Session::put('cart', $cart->get());
 
         $request->session()->flash('success', 'Order has been sent!!!');
         return redirect()->back();
